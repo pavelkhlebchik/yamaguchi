@@ -70,19 +70,21 @@ img.src = SenseiWalk;
 
 img.addEventListener('load', () => {
   setInterval(() => {
-    const leftLimit = 0;
     const rightLimit = canvas.offsetWidth - spriteW;
-    const upLimit = 0;
+    const leftLimit = -(rightLimit / 2);
     const downLimit = canvas.offsetHeight - spriteH;
+    const upLimit = -(downLimit / 2);
+    const startX = positionX + (rightLimit / 2);
+    const startY = positionY + (downLimit / 2);
 
     if (leftLimit > positionX) {
       positionX = leftLimit;
-    } else if (positionX > rightLimit) {
-      positionX = rightLimit;
+    } else if (positionX > (rightLimit + leftLimit)) {
+      positionX = rightLimit + leftLimit;
     } else if (upLimit > positionY) {
       positionY = upLimit;
-    } else if (positionY > downLimit) {
-      positionY = downLimit;
+    } else if (positionY > (upLimit + downLimit)) {
+      positionY = upLimit + downLimit;
     }
 
     if (bottomDownPressed) {
@@ -102,8 +104,8 @@ img.addEventListener('load', () => {
       cyclePos = 48;
       cycle = (cycle + 1) % shots;
     }
-    console.log(positionX);
+
     ctx.clearRect(0, 0, 600, 600);
-    ctx.drawImage(img, cycle * spriteW, cyclePos, spriteW, spriteH, positionX, positionY, 48, 48);
+    ctx.drawImage(img, cycle * spriteW, cyclePos, spriteW, spriteH, startX, startY, 48, 48);
   }, 120);
 });
