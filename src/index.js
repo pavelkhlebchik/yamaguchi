@@ -6,6 +6,7 @@ const canvas = document.querySelector('#game');
 const ctx = canvas.getContext('2d');
 const spriteW = 48;
 const spriteH = 48;
+const characterStep = 10;
 const shots = 3;
 let cycle = 0;
 let cyclePos = 0;
@@ -69,24 +70,41 @@ img.src = SenseiWalk;
 
 img.addEventListener('load', () => {
   setInterval(() => {
+    const leftLimit = canvas.getBoundingClientRect().left;
+    const rightLimit = canvas.offsetWidth;
+    const upLimit = canvas.getBoundingClientRect().top + spriteH;
+    const downLimit = canvas.offsetHeight;
+    const startX = positionX + (rightLimit / 2);
+    const startY = positionY + (downLimit / 2);
+    if (positionX > leftLimit) {
+      positionX = leftLimit;
+    } else if (positionX > rightLimit) {
+      positionX = rightLimit;
+    } else if (upLimit < positionY) {
+      positionY = upLimit;
+    } else if (positionY > downLimit) {
+      positionY = downLimit;
+    }
+
     if (bottomDownPressed) {
-      positionY += 10;
+      positionY += characterStep;
       cyclePos = 0;
       cycle = (cycle + 1) % shots;
     } else if (bottomUpPressed) {
-      positionY -= 10;
+      positionY -= characterStep;
       cyclePos = 144;
       cycle = (cycle + 1) % shots;
     } else if (bottomRightPressed) {
-      positionX += 10;
+      positionX += characterStep;
       cyclePos = 96;
       cycle = (cycle + 1) % shots;
     } else if (bottomLeftPressed) {
-      positionX -= 10;
+      positionX -= characterStep;
       cyclePos = 48;
       cycle = (cycle + 1) % shots;
     }
+
     ctx.clearRect(0, 0, 600, 600);
-    ctx.drawImage(img, cycle * spriteW, cyclePos, spriteW, spriteH, positionX, positionY, 48, 48);
+    ctx.drawImage(img, cycle * spriteW, cyclePos, spriteW, spriteH, startX, startY, 48, 48);
   }, 120);
 });
