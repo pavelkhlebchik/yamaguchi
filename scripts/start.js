@@ -30,6 +30,7 @@ const init = async () => {
   });
 
   await server.start();
+  console.log('server started %s', server.info.uri);
 };
 
 process.on('unhandledRejection', (err) => {
