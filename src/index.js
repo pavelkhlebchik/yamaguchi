@@ -30,7 +30,9 @@ terrain.src = terrainAtlas;
 terrain.addEventListener('load', () => {
   const { map } = worldCfg;
   map.forEach((cfgRow, y) => {
+    console.log(map);
     cfgRow.forEach((cfgCell, x) => {
+      console.log(cfgRow);
       const [sX, sY, sW, sH] = sprites.terrain[cfgCell[0]].frames[0];
       ctx.drawImage(terrain, sX, sY, sW, sH, x * spriteW, y * spriteH, spriteW, spriteH);
     });
@@ -86,44 +88,44 @@ document.addEventListener('keyup', keyUpHandler);
 const img = document.createElement('img');
 img.src = SenseiWalk;
 
-// img.addEventListener('load', () => {
-//   setInterval(() => {
-//     const rightLimit = canvas.offsetWidth - spriteW;
-//     const leftLimit = -(rightLimit / 2);
-//     const downLimit = canvas.offsetHeight - spriteH;
-//     const upLimit = -(downLimit / 2);
-//     const startX = positionX + rightLimit / 2;
-//     const startY = positionY + downLimit / 2;
+img.addEventListener('load', () => {
+  setInterval(() => {
+    const rightLimit = canvas.offsetWidth - spriteW;
+    const leftLimit = -(rightLimit / 2);
+    const downLimit = canvas.offsetHeight - spriteH;
+    const upLimit = -(downLimit / 2);
+    const startX = positionX + rightLimit / 2;
+    const startY = positionY + downLimit / 2;
 
-//     if (leftLimit > positionX) {
-//       positionX = leftLimit;
-//     } else if (positionX > rightLimit + leftLimit) {
-//       positionX = rightLimit + leftLimit;
-//     } else if (upLimit > positionY) {
-//       positionY = upLimit;
-//     } else if (positionY > upLimit + downLimit) {
-//       positionY = upLimit + downLimit;
-//     }
+    if (leftLimit > positionX) {
+      positionX = leftLimit;
+    } else if (positionX > rightLimit + leftLimit) {
+      positionX = rightLimit + leftLimit;
+    } else if (upLimit > positionY) {
+      positionY = upLimit;
+    } else if (positionY > upLimit + downLimit) {
+      positionY = upLimit + downLimit;
+    }
 
-//     if (bottomDownPressed) {
-//       positionY += characterStep;
-//       cyclePos = 0;
-//       cycle = (cycle + 1) % shots;
-//     } else if (bottomUpPressed) {
-//       positionY -= characterStep;
-//       cyclePos = 144;
-//       cycle = (cycle + 1) % shots;
-//     } else if (bottomRightPressed) {
-//       positionX += characterStep;
-//       cyclePos = 96;
-//       cycle = (cycle + 1) % shots;
-//     } else if (bottomLeftPressed) {
-//       positionX -= characterStep;
-//       cyclePos = 48;
-//       cycle = (cycle + 1) % shots;
-//     }
+    if (bottomDownPressed) {
+      positionY += characterStep;
+      cyclePos = 0;
+      cycle = (cycle + 1) % shots;
+    } else if (bottomUpPressed) {
+      positionY -= characterStep;
+      cyclePos = 144;
+      cycle = (cycle + 1) % shots;
+    } else if (bottomRightPressed) {
+      positionX += characterStep;
+      cyclePos = 96;
+      cycle = (cycle + 1) % shots;
+    } else if (bottomLeftPressed) {
+      positionX -= characterStep;
+      cyclePos = 48;
+      cycle = (cycle + 1) % shots;
+    }
 
-//     ctx.clearRect(0, 0, 600, 600);
-//     ctx.drawImage(img, cycle * spriteW, cyclePos, spriteW, spriteH, startX, startY, 48, 48);
-//   }, 120);
-// });
+    ctx.clearRect(0, 0, 600, 600);
+    ctx.drawImage(img, cycle * spriteW, cyclePos, spriteW, spriteH, startX, startY, 48, 48);
+  }, 120);
+});
