@@ -1,4 +1,9 @@
-// import './index.scss';
+import './index.scss';
+import ClientGame from './client/ClientGame';
+
+window.addEventListener('load', () => {
+  ClientGame.init({ tagId: 'game' });
+});
 // import SenseiWalk from './assets/Female-2-Walk.png';
 // import terrainAtlas from './assets/terrain.png';
 // import worldCfg from './configs/world.json';
@@ -13,16 +18,16 @@
 // const characterStep = 10;
 // const shots = 3;
 
-// const cycle = 0;
-// const cyclePos = 0;
+// let cycle = 0;
+// let cyclePos = 0;
 
 // let bottomDownPressed = false;
 // let bottomUpPressed = false;
 // let bottomLeftPressed = false;
 // let bottomRightPressed = false;
 
-// const positionY = 0;
-// const positionX = 0;
+// let positionY = 0;
+// let positionX = 0;
 
 // const terrain = document.createElement('img');
 // terrain.src = terrainAtlas;
@@ -30,7 +35,10 @@
 // terrain.addEventListener('load', () => {
 //   const { map } = worldCfg;
 //   map.forEach((cfgRow, y) => {
+
+//     console.log(map);
 //     cfgRow.forEach((cfgCell, x) => {
+//       console.log(cfgRow);
 //       const [sX, sY, sW, sH] = sprites.terrain[cfgCell[0]].frames[0];
 //       ctx.drawImage(terrain, sX, sY, sW, sH, x * spriteW, y * spriteH, spriteW, spriteH);
 //     });
