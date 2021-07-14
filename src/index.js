@@ -35,6 +35,7 @@ window.addEventListener('load', () => {
 // terrain.addEventListener('load', () => {
 //   const { map } = worldCfg;
 //   map.forEach((cfgRow, y) => {
+
 //     console.log(map);
 //     cfgRow.forEach((cfgCell, x) => {
 //       console.log(cfgRow);
