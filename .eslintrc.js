@@ -10,5 +10,6 @@ module.exports = {
   },
   rules: {
     'object-curly-newline': ['error', { consistent: true }],
+    'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
   },
 };
