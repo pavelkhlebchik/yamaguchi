@@ -8,5 +8,8 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  rules: {},
+  rules: {
+    'object-curly-newline': ['error', { consistent: true }],
+    'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
+  },
 };
