@@ -26,6 +26,8 @@ class ClientGameObject extends MovableObject {
         objectConfig: objCfg,
         type: objCfg.type,
         world,
+        state: 'main',
+        animationStartTime: 0,
       },
       cfg,
     );
@@ -49,8 +51,17 @@ class ClientGameObject extends MovableObject {
       this.cell = newCell;
       newCell.addGameObject(this);
 
-      const { x, y, width, height } = newCell;
-      Object.assign(this, { x, y, width, height });
+      this.moveTo(newCell.x, newCell.y, true, 200);
+      // const { x, y, width, height } = newCell;
+      // Object.assign(this, { x, y, width, height });
+    }
+  }
+
+  setState(state) {
+    this.state = state;
+
+    if (this.world) {
+      this.animationStartTime = this.world.engine.lastRenderTime;
     }
   }
 

@@ -37,9 +37,9 @@ class ClientGame {
   initEngine() {
     this.engine.loadSprites(sprites).then(() => {
       this.map.init();
-      this.engine.on('render', () => {
+      this.engine.on('render', (_, time) => {
         this.engine.camera.focusAtGameObject(this.player);
-        this.map.render();
+        this.map.render(time);
       });
       this.engine.start();
       this.initKeys();
@@ -67,8 +67,9 @@ class ClientGame {
 
     if (player) {
       player.moveByCellCoord(dirs[dir][0], dirs[dir][1], (cell) => cell.findObjectsByType('grass').length);
-    } else {
-      player.moveByCellCoord(dirs[dir][2], dirs[dir][3], (cell) => cell.findObjectsByType('grass').length);
+
+      player.setState(dir);
+      player.once('motion-stopped', () => player.setState('main'));
     }
   }
 
