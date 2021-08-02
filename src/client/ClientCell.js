@@ -1,5 +1,6 @@
 import PositionedObject from '../common/PositionedObject';
 import ClientGameObject from './ClientGameObject';
+import ClientPlayer from './ClientPlayer';
 
 class ClientCell extends PositionedObject {
   constructor(cfg) {
@@ -15,6 +16,11 @@ class ClientCell extends PositionedObject {
         y: cellWidth * cfg.cellRow,
         width: cellWidth,
         height: cellHeight,
+        col: cfg.cellCol,
+        row: cfg.cellRow,
+        objectClasses: {
+          player: ClientPlayer,
+        },
       },
       cfg,
     );
@@ -23,20 +29,30 @@ class ClientCell extends PositionedObject {
   }
 
   initGameObjects() {
-    const { cellCfg } = this;
+    const { cellCfg, objectClasses } = this;
 
-    this.objects = cellCfg.map((lay, layId) =>
-      // eslint-disable-next-line implicit-arrow-linebreak
-      lay.map(
-        (objCfg) =>
+    this.objects = cellCfg.map(
+      (lay, layId) =>
+        // eslint-disable-next-line implicit-arrow-linebreak
+        lay.map(
+          (objCfg) => {
+            let ObjectClass;
+
+            if (objCfg.class) {
+              ObjectClass = objectClasses[objCfg.class];
+            } else {
+              ObjectClass = ClientGameObject;
+            }
+
+            return new ObjectClass({
+              cell: this,
+              objCfg,
+              layId,
+            });
+          },
           // eslint-disable-next-line implicit-arrow-linebreak
-          new ClientGameObject({
-            cell: this,
-            objCfg,
-            layId,
-          }),
-      ),
-    // eslint-disable-next-line function-paren-newline
+        ),
+      // eslint-disable-next-line function-paren-newline
     );
   }
 
