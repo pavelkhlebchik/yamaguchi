@@ -1,7 +1,8 @@
 import EventSourceMixin from '../common/EventSourceMixin';
+import clamp, { getRandomColor } from '../common/util';
+
 import ClientCamera from './ClientCamera';
 import ClientInput from './ClientInput';
-import clamp from '../common/util';
 
 class ClientEngine {
   constructor(canvas, game) {
@@ -130,7 +131,7 @@ class ClientEngine {
 
   renderSign(opt) {
     const options = {
-      color: 'Black',
+      color: getRandomColor(),
       bgColor: '#f4f4f4',
       font: '16px, sans-serif',
       verticalPadding: 5,
