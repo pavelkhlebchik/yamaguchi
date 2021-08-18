@@ -48,6 +48,7 @@ class ClientCell extends PositionedObject {
               cell: this,
               objCfg,
               layId,
+              playerName: this.world.game.cfg?.playerName,
             });
           },
           // eslint-disable-next-line implicit-arrow-linebreak

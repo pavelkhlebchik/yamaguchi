@@ -2,10 +2,24 @@ import './index.scss';
 import ClientGame from './client/ClientGame';
 // import playerName from './client/ClientPlayer';
 
-document.getElementById('start-btn').addEventListener('click', (evt) => {
-  evt.preventDefault();
-  ClientGame.init({
-    tagId: 'game',
-  });
-  document.querySelector('.start-game').classList.remove('start-game');
+window.addEventListener('load', () => {
+  const $startGame = document.querySelector('.start-game');
+  const $nameForm = document.getElementById('nameForm');
+  const $inputName = document.getElementById('name');
+
+  const submitName = (e) => {
+    e.preventDefault();
+
+    if ($inputName.value) {
+      ClientGame.init({
+        tagId: 'game',
+        playerName: $inputName.value,
+      });
+
+      $nameForm.removeEventListener('submit', submitName);
+      $startGame.remove();
+    }
+  };
+
+  $nameForm.addEventListener('submit', submitName);
 });
