@@ -22,6 +22,7 @@ window.addEventListener('load', () => {
         tagId: 'game',
         playerName: $inputName.value,
       });
+
       socket.emit('start', $inputName.value);
       $chatWrap.style.display = 'block';
 
@@ -42,10 +43,21 @@ window.addEventListener('load', () => {
   });
 
   socket.on('chat connection', (data) => {
-    $message.insertAdjacentHTML('beforeend', `<p>${data.msg}</p>`);
+    $message.insertAdjacentHTML('beforeend', `<p style="color: green"><strong>${data.msg}</strong></p>`);
+  });
+
+  socket.on('chat online', (data) => {
+    $form.insertAdjacentHTML('beforeend', `<p class="online" title="Онлайн Игроков"><strong>${data.online}</strong></p>`);
   });
 
   socket.on('chat message', (data) => {
-    $message.insertAdjacentHTML('beforeend', `<p><strong>${getTime(data.time)}</strong> - ${data.name}: ${data.msg}</p>`);
+    $message.insertAdjacentHTML(
+      'beforeend',
+      `<p><strong>${getTime(data.time)}</strong> - ${data.name}: ${data.msg}</p>`,
+    );
+  });
+
+  socket.on('chat disconnect', (data) => {
+    $message.insertAdjacentHTML('beforeend', `<p style="color: tomato"><strong>${data.msg}</strong></p>`);
   });
 });

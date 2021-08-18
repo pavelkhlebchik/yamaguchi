@@ -32,5 +32,7 @@ export function getRandomColor() {
 
 export function getTime(date) {
   const convertDate = new Date(date);
-  return `${normalize(convertDate.getHours())}:${normalize(convertDate.getMinutes())}:${normalize(convertDate.getSeconds())}`;
+  return `${normalize(convertDate.getHours())}:${normalize(convertDate.getMinutes())}:${normalize(
+    convertDate.getSeconds(),
+  )}`;
 }

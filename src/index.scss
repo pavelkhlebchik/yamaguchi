@@ -226,6 +226,7 @@ body {
 }
 
 .send form {
+  position: relative;
   display: flex;
   align-content: stretch;
 }
@@ -253,4 +254,29 @@ body {
   bottom: 36px;
   overflow: scroll;
   padding: 6px 8px;
+}
+
+.online {
+  position: sticky;
+  top: 333px;
+  left: 0;
+  font-family: monospace;
+  font-size: 14px;
+  color: lightgrey;
+
+  &:hover {
+    color: slategray;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    display: block;
+    background-color: lightgreen;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+  }
 }
