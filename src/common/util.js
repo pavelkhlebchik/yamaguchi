@@ -1,4 +1,6 @@
 /* eslint-disable no-param-reassign */
+const normalize = (num) => (num.toString().length > 1 ? num : `0${num}`);
+
 export default function clamp(x, fromX, toX) {
   if (x < fromX) x = fromX;
   if (x > toX) x = toX;
@@ -26,4 +28,9 @@ export function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
+}
+
+export function getTime(date) {
+  const convertDate = new Date(date);
+  return `${normalize(convertDate.getHours())}:${normalize(convertDate.getMinutes())}:${normalize(convertDate.getSeconds())}`;
 }
