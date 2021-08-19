@@ -1,137 +1,68 @@
+import { io } from 'socket.io-client';
 import './index.scss';
+import { getTime } from './common/util';
 import ClientGame from './client/ClientGame';
 
 window.addEventListener('load', () => {
-  ClientGame.init({ tagId: 'game' });
+  const socket = io('https://jsprochat.herokuapp.com');
+  const $startGame = document.querySelector('.start-game');
+  const $nameForm = document.getElementById('nameForm');
+  const $inputName = document.getElementById('name');
+
+  const $chatWrap = document.querySelector('.chat-wrap');
+  const $form = document.getElementById('form');
+  const $input = document.getElementById('input');
+  const $message = document.querySelector('.message');
+
+  const submitName = (e) => {
+    e.preventDefault();
+
+    if ($inputName.value) {
+      ClientGame.init({
+        tagId: 'game',
+        playerName: $inputName.value,
+      });
+
+      socket.emit('start', $inputName.value);
+      $chatWrap.style.display = 'block';
+
+      $nameForm.removeEventListener('submit', submitName);
+      $startGame.remove();
+    }
+  };
+
+  $nameForm.addEventListener('submit', submitName);
+
+  $form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if ($input.value) {
+      socket.emit('chat message', $input.value);
+      $message.scrollTop = $message.scrollHeight;
+      $input.value = '';
+    }
+  });
+
+  socket.on('chat connection', (data) => {
+    $message.insertAdjacentHTML('beforeend', `<p style="color: green"><strong>${data.msg}</strong></p>`);
+  });
+
+  socket.on('chat online', (data) => {
+    $message.insertAdjacentHTML(
+      'beforeend',
+      `<div class="online-wrapper">
+      <p class="online" title="Онлайн Игроков"><strong>${data.online}</strong></p>
+      </div>`,
+    );
+  });
+
+  socket.on('chat message', (data) => {
+    $message.insertAdjacentHTML(
+      'beforeend',
+      `<p><strong>${getTime(data.time)}</strong> - ${data.name}: ${data.msg}</p>`,
+    );
+  });
+
+  socket.on('chat disconnect', (data) => {
+    $message.insertAdjacentHTML('beforeend', `<p style="color: tomato"><strong>${data.msg}</strong></p>`);
+  });
 });
-// import SenseiWalk from './assets/Female-2-Walk.png';
-// import terrainAtlas from './assets/terrain.png';
-// import worldCfg from './configs/world.json';
-// import sprites from './configs/sprites';
-
-// const canvas = document.querySelector('#game');
-// const ctx = canvas.getContext('2d');
-
-// const spriteW = 48;
-// const spriteH = 48;
-
-// const characterStep = 10;
-// const shots = 3;
-
-// let cycle = 0;
-// let cyclePos = 0;
-
-// let bottomDownPressed = false;
-// let bottomUpPressed = false;
-// let bottomLeftPressed = false;
-// let bottomRightPressed = false;
-
-// let positionY = 0;
-// let positionX = 0;
-
-// const terrain = document.createElement('img');
-// terrain.src = terrainAtlas;
-
-// terrain.addEventListener('load', () => {
-//   const { map } = worldCfg;
-//   map.forEach((cfgRow, y) => {
-
-//     console.log(map);
-//     cfgRow.forEach((cfgCell, x) => {
-//       console.log(cfgRow);
-//       const [sX, sY, sW, sH] = sprites.terrain[cfgCell[0]].frames[0];
-//       ctx.drawImage(terrain, sX, sY, sW, sH, x * spriteW, y * spriteH, spriteW, spriteH);
-//     });
-//   });
-// });
-// const keyDownHandler = (evt) => {
-//   switch (evt.key) {
-//     case 'Down':
-//     case 'ArrowDown':
-//       bottomDownPressed = true;
-//       break;
-//     case 'Up':
-//     case 'ArrowUp':
-//       bottomUpPressed = true;
-//       break;
-//     case 'Left':
-//     case 'ArrowLeft':
-//       bottomLeftPressed = true;
-//       break;
-//     case 'Right':
-//     case 'ArrowRight':
-//       bottomRightPressed = true;
-//       break;
-//     default:
-//   }
-// };
-
-// const keyUpHandler = (evt) => {
-//   switch (evt.key) {
-//     case 'Down':
-//     case 'ArrowDown':
-//       bottomDownPressed = false;
-//       break;
-//     case 'Up':
-//     case 'ArrowUp':
-//       bottomUpPressed = false;
-//       break;
-//     case 'Left':
-//     case 'ArrowLeft':
-//       bottomLeftPressed = false;
-//       break;
-//     case 'Right':
-//     case 'ArrowRight':
-//       bottomRightPressed = false;
-//       break;
-//     default:
-//   }
-// };
-
-// document.addEventListener('keydown', keyDownHandler);
-// document.addEventListener('keyup', keyUpHandler);
-
-// const img = document.createElement('img');
-// img.src = SenseiWalk;
-
-// img.addEventListener('load', () => {
-//   setInterval(() => {
-//     const rightLimit = canvas.offsetWidth - spriteW;
-//     const leftLimit = -(rightLimit / 2);
-//     const downLimit = canvas.offsetHeight - spriteH;
-//     const upLimit = -(downLimit / 2);
-//     const startX = positionX + rightLimit / 2;
-//     const startY = positionY + downLimit / 2;
-
-//     if (leftLimit > positionX) {
-//       positionX = leftLimit;
-//     } else if (positionX > rightLimit + leftLimit) {
-//       positionX = rightLimit + leftLimit;
-//     } else if (upLimit > positionY) {
-//       positionY = upLimit;
-//     } else if (positionY > upLimit + downLimit) {
-//       positionY = upLimit + downLimit;
-//     }
-
-//     if (bottomDownPressed) {
-//       positionY += characterStep;
-//       cyclePos = 0;
-//       cycle = (cycle + 1) % shots;
-//     } else if (bottomUpPressed) {
-//       positionY -= characterStep;
-//       cyclePos = 144;
-//       cycle = (cycle + 1) % shots;
-//     } else if (bottomRightPressed) {
-//       positionX += characterStep;
-//       cyclePos = 96;
-//       cycle = (cycle + 1) % shots;
-//     } else if (bottomLeftPressed) {
-//       positionX -= characterStep;
-//       cyclePos = 48;
-//       cycle = (cycle + 1) % shots;
-//     }
-
-//     ctx.clearRect(0, 0, 600, 600);
-//     ctx.drawImage(img, cycle * spriteW, cyclePos, spriteW, spriteH, startX, startY, 48, 48);
-//   }, 120);
-// });
