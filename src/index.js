@@ -37,7 +37,7 @@ window.addEventListener('load', () => {
     e.preventDefault();
     if ($input.value) {
       socket.emit('chat message', $input.value);
-
+      $message.scrollTop = $message.scrollHeight;
       $input.value = '';
     }
   });
@@ -47,7 +47,12 @@ window.addEventListener('load', () => {
   });
 
   socket.on('chat online', (data) => {
-    $form.insertAdjacentHTML('beforeend', `<p class="online" title="Онлайн Игроков"><strong>${data.online}</strong></p>`);
+    $message.insertAdjacentHTML(
+      'beforeend',
+      `<div class="online-wrapper">
+      <p class="online" title="Онлайн Игроков"><strong>${data.online}</strong></p>
+      </div>`,
+    );
   });
 
   socket.on('chat message', (data) => {
