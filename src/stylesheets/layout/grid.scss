@@ -1,0 +1,30 @@
+.page-body {
+  font-family: $basic-font;
+
+  @media (min-width: $tablet-width) {
+    min-width: 768px;
+  }
+
+  @media (min-width: $desktop-width) {
+    min-width: 1200px;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  align-content: start;
+  height: 100%;
+  overflow: hidden;
+  background-color: $bg;
+
+  @media (min-width: $tablet-width) {
+    width: 100%;
+  }
+
+  @media (min-width: $desktop-width) {
+    min-width: 1200px;
+  }
+}

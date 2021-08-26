@@ -2,65 +2,40 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="vievport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Онлайн РПГ-игра</title>
+	<title>Yamaguchi test</title>
 </head>
 
-<body>
-	<div class="wrap">
-		<div class="logo"></div>
-		<div class="canvas-wrap">
-			<div class="start-game">
-				<form id="nameForm">
-					<div class="row">
-						Put Your Name
-					</div>
-					<div class="row">
-						<input class="input" type="text" name="name" id="name">
-					</div>
-					<div class="row">
-						<button class="btn" id="start-btn">
-							START GAME
-						</button>
-					</div>
-				</form>
+<body class="page-body">
+	<main class="wrapper">
+		<h1 class="visually-hidden">
+			СЕОшный текст
+		</h1>
+		<section class="product">
+			<h2 class="product__title product__title--accent">
+				Эргономика — ключ к успеху современного человека
+			</h2>
+			<p class="product__description">
+				Cтильная столешница , выполненной из экологически безопасного материала (ДСП), и усиленной стальной рамы
+				не составит труда разместить на поверхности инновационного стола большое количество крупногабаритной техники:
+				стол выдерживает нагрузку до 80 кг.
+			</p>
+			<div class="product__inner">
+				<img class="product__image product__image--table" src="http://placehold.it/332x268" alt="Картинка столешницы" />
+				<img class="product__image product__image--legs" src="http://placehold.it/332x268" alt="Картинка столешницы" />
+				<div class="product__btn-wrapper">
+					<button class="product__btn product__btn--accent" type="button">вверх</button>
+					<button class="product__btn product__btn--accent" type="button">вниз</button>
+				</div>
 			</div>
-			<canvas id="game" width="600" height="600" tabindex="1"></canvas>
-			<h3>Loading...</h3>
-			<div class="border">
-				<div class="top-left"></div>
-				<div class="top"></div>
-				<div class="top-right"></div>
-				<div class="right"></div>
-				<div class="bottom-right"></div>
-				<div class="bottom"></div>
-				<div class="bottom-left"></div>
-				<div class="left"></div>
-			</div>
-		</div>
-		<div class="chat-wrap" style="display: none">
-			<div class="message"></div>
-			<div class="send">
-				<form id="form">
-					<input type="text" id="input">
-					<button>
-						SEND
-					</button>
-				</form>
-			</div>
-			<div class="border">
-				<div class="top-left"></div>
-				<div class="top"></div>
-				<div class="top-right"></div>
-				<div class="right"></div>
-				<div class="bottom-right"></div>
-				<div class="bottom"></div>
-				<div class="bottom-left"></div>
-				<div class="left"></div>
-			</div>
-		</div>
-	</div>
+			<p class="product__description">
+				Также столешница, обладающая меламиновым покрытием, хорошо переносит механические воздействия (царапины
+				или удары), при контакте с водой не разрушается, устойчиво переносит бытовые химические вещества и не выгорает
+				под воздействием ультрафиолета.
+			</p>
+		</section>
+	</main>
 </body>
 
 </html>

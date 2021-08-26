@@ -1,26 +1,25 @@
 {
-  "name": "rpg",
+  "name": "yamaguchi",
   "version": "1.0.0",
-  "description": "RPG Game",
+  "description": "yamaguchi test",
   "scripts": {
     "build": "env NODE_ENV=production npx webpack",
     "build:dev": "env NODE_ENV=development npx webpack",
-    "start": "node scripts/start.js",
     "lint": "npx eslint src/**/*.js",
     "prettier": "npx prettier --write .",
-    "dev": "npx webpack server --port 9000",
+    "dev": "npx webpack server --port 3000",
     "prepare": "husky install"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pavelkhlebchik/rpg.git"
+    "url": "git+https://github.com/pavelkhlebchik/yamaguchi.git"
   },
   "author": "Pavel Koltsov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pavelkhlebchik/rpg/issues"
+    "url": "https://github.com/pavelkhlebchik/yamaguchi/issues"
   },
-  "homepage": "https://github.com/pavelkhlebchik/rpg#readme",
+  "homepage": "https://github.com/pavelkhlebchik/yamaguchi#readme",
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "babel-loader": "^8.2.2",
@@ -29,6 +28,7 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
     "file-loader": "^6.2.0",
+    "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
     "husky": "^6.0.0",
     "prettier": "^2.3.2",
@@ -41,9 +41,5 @@
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   },
-  "dependencies": {
-    "@hapi/hapi": "^20.1.5",
-    "@hapi/inert": "^6.0.3",
-    "socket.io-client": "^4.1.3"
-  }
+  "dependencies": {}
 }
