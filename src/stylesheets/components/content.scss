@@ -1,0 +1,13 @@
+.product__title {
+	font-size: 38px;
+	font-weight: 700;
+
+	&--accent {
+		color: $text-color-accent;
+	}
+}
+
+.product__description {
+	font-size: 16px;
+	line-height: 27px;
+}

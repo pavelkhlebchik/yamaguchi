@@ -1,0 +1,23 @@
+.product__btn {
+    position: absolute;
+    top: 50%;
+    
+    &--up {
+        left: 25%;
+    }
+    &--down {
+        right: 25%;
+    }
+
+    &--accent {
+        width: 75px;
+        height: 75px;
+        border: none;
+        border-radius: 50%;
+        background-color: $bg-button;
+    }
+
+    &--accent:active {
+        background-color: $bg-button-active;
+    }
+}

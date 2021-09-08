@@ -22,21 +22,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.html$/,
-        loader: 'html-loader',
-      },
-      {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: [/node_modules/],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-        ],
       },
       {
         test: [/\.svg$/, /\.bpm$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -48,6 +36,14 @@ module.exports = {
               outputPath: 'assets/',
             },
           },
+        ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
         ],
       },
     ],
